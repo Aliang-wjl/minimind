@@ -4,3 +4,6 @@ __pycache__/
 out
 website/
 docs-minimind/
+# Local training datasets
+/dataset/*.jsonl
+/dataset/*.jsonl.part
