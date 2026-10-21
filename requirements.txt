@@ -34,3 +34,11 @@ uvicorn==0.38.0
 # torchvision==0.21.0
 # peft==0.7.1
 # matplotlib==3.10.0
+
+# 完整训练
+# python run_minimind_training.py
+
+# 开始训练的方式，分阶段训练
+# python run_minimind_training.py --stage pretrain
+# python run_minimind_training.py --stage pretrain --force
+# python run_minimind_training.py --stage sft

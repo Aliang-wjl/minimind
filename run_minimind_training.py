@@ -20,8 +20,8 @@ def main() -> None:
     parser.add_argument("--stage", choices=("both", "pretrain", "sft"), default="both",
                         help="运行阶段；默认先预训练，再做 SFT")
     parser.add_argument("--epochs", type=int, default=1, help="每个阶段的训练轮数，默认 1")
-    parser.add_argument("--pretrain-batch-size", type=int, default=16)
-    parser.add_argument("--sft-batch-size", type=int, default=8)
+    parser.add_argument("--pretrain-batch-size", type=int, default=32)
+    parser.add_argument("--sft-batch-size", type=int, default=16)
     parser.add_argument("--num-workers", type=int, default=0,
                         help="Windows 上先用 0 更稳妥；运行正常后可尝试 2")
     parser.add_argument("--force", action="store_true",
