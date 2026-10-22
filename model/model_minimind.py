@@ -329,11 +329,11 @@ class Attention(nn.Module):
         # Attention 内核要求 [B,H,T,D]；同时把 H_kv 个 K/V 头复制到 H 个头。
         xq, xk, xv = (xq.transpose(1, 2), repeat_kv(xk, self.n_rep).transpose(1, 2), repeat_kv(xv, self.n_rep).transpose(1, 2))
 
-        # 无 KV Cache、无真实 padding 且序列不止一个 token 时，可走高效 SDPA 分支。
+        # 无 KV Cache、无真实 padding 且序列不止一个 token 时，可走高效 SDPA 分支
         if self.flash and (seq_len > 1) and (not self.is_causal or past_key_value is None) and (attention_mask is None or torch.all(attention_mask == 1)):
             # SDPA 内部完成 QK^T、缩放、因果遮罩、softmax、dropout 和与 V 相乘。
             output = F.scaled_dot_product_attention(xq, xk, xv, dropout_p=self.dropout if self.training else 0.0, is_causal=self.is_causal)
-        else:
+        else: 
             # 手工计算缩放点积注意力分数，形状 [B,H,T,current_total_T]。
             scores = (xq @ xk.transpose(-2, -1)).float() / math.sqrt(self.head_dim)
 
